@@ -1,0 +1,96 @@
+SELECT USER(); --> through which login connected	
+
+SELECT DATABASE(); --> through which database connected currently
+ 
+USE MYDB0; ---> to connect database
+ 
+SHOW TABLES; --> shows available tables 
+
+SQL COMMANDS PART1 (DQL)
+-------------------------
+* ---> display all columns 
+
+SELECT * FROM table_name; ---> to print tables
+
+DESC table_name  ---> structure of tables (column names and other details)
+
+SELECT COLUMN1, COLUMN2 FROM TABLE_NAME;
+
+SELECT * FROM TABLE_NAME WHERE 4 > 90 ---> not error no records shown cause condition is false
+
+SELECT * FROM EMP WHERE ENAME <> 'SMITH'; ---> display table except smith
+            OR
+SELECT * FROM EMP WHERE ENAME != 'SMITH'; 
+
+LOGICAL AND OR OPERATORS
+-----------------------
+
+SELECT * FROM TABLE_NAME 
+WHERE JOB = 'CLERK' AND SAL < 1000;
+
+SELECT * FROM TABLE_NAME 
+WHERE JOB = 'CLERK' OR SAL < 1000;
+
+SELECT * FROM EMP 
+WHERE (JOB = 'MANAGER' OR JOB = 'CLERK') AND SAL<1000; --> Parenthisis has more priority while running query
+
+SQL SPECIAL OPERATORS
+---------------------
+
+1)BETWEEN : it works with range of values
+
+ SELECT * FROM EMP WHERE SAL BETWEEN 1250 AND 3000; ---->both values are inclusive
+ 
+ SELECT * FROM EMP WHERE ENAME BETWEEN 'ADAMS' AND 'SMITH'; --->range between first later of condition
+ SELECT * FROM EMP WHERE SAL NOT BETWEEN 1250 AND 3000;
+ SELECT * FROM EMP WHERE ENAME NOT BETWEEN 'ADAMS' AND 'SMITH';
+ 
+ 2) IN : useful for equating multiple values of a single column it acts as logical or operator'
+ 
+  SELECT * FROM EMP WHERE JOB IN ('CLERK','MANAGER');  ---> in convert query into or
+  SELECT * FROM EMP WHERE JOB NOT IN ('CLERK','MANAGER'); 
+  SELECT * FROM EMP WHERE JOB NOT IN ('CLERK','MANAGER',NULL); ---> in means it convert query into and
+  SELECT * FROM EMP WHERE SAL NOT IN (1250,9999); ---> everything will print except salary 1250 and 9999.
+  
+ 3) IS NULL : to see the null value records or missing or blank value records
+
+   SELECT * FROM EMP WHERE COMM IS NULL;
+   
+4) LIKE : it is a pattern matching operator. it will not search for an "exact value".
+          #there are two wild cards associated with LIKE operator.
+		    a) % -> it will replace any character and any number of characters.
+                    it replaces zero or one or multiple characters.		
+
+                     SELECT * FROM EMP WHERE ENAME LIKE 'S%';	
+					 
+			b)_  ->  a single underscore replaces single character. so to replace
+			         certain number of
+					 
+					 SELECT * FROM PCODES WHERE CODE LIKE '__01';
+					 
+					 
+5)	ESACPE:
+		SELECT * FROM PCODES WHERE CODE LIKE 'A?%C01' ESCAPE '?';
+		SELECT * FROM PCODES WHERE CODE NOT LIKE 'A?%C01' ESCAPE '?';
+	
+6)
+     COLUMN ALIASES ---> only in the output of select statement the column will have a different cutomized 
+							heading
+	 SELECT ENAME, SAL AS SALARY FROM EMP; ---> As is optional keyword
+	 SELECT ENAME 'NAME OF EMPLOYEE' ,SAL SALARY FROM EMP;
+					 
+ORDER BY CLAUSE:
+----------------
+	 SELECT * FROM EMP ORDER BY ENAME DESC; ---> Asc -ascending
+	 PRECEDENCE RULE ---> NULL ,NEGATIVE VALUE , 0 , POSITIVE 
+     
+	 #first position in query having first priority in ORDERBY clause.
+      SELECT ENAME,SAL,DEPTNO FROM EMP ORDER BY 2;
+
+    
+     
+
+
+
+
+
